@@ -34,7 +34,7 @@ sub render {
 		$line =~ s/{%\s*title\s*%}/$title/g;
 		$line =~ s/{%\s*content\s*%}/$content/g;
 		print encode("utf8",$line);
-    }
+	}
 }
 
 sub escapeChars {
