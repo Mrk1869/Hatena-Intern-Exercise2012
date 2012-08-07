@@ -3,10 +3,10 @@ var Template = function(input) {
 };
 
 Template.prototype = {
-	render: function(variables) {
+	render: function(data) {
 		//記事データの読み取りとhtmlエスケープ
-		this.h1 = this.escapeChars(variables["title"]);
-		this.h2 = this.escapeChars(variables["content"]);
+		this.h1 = this.escapeChars(data["title"]);
+		this.h2 = this.escapeChars(data["content"]);
 		//テンプレートの置き換え
 		this.src = this.src.replace(/{%\s*title\s*%}/,this.h1);
 		this.src = this.src.replace(/{%\s*content\s*%}/,this.h2);
