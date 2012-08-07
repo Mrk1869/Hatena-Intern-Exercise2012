@@ -44,7 +44,6 @@ sub escapeChars {
 	$char =~ s/"/&quot;/g;
 	$char =~ s/'/#39;/g;
 	$char =~ s/&/&amp;/g;
-	$char;
 }
 
 #何か返さないとエラー
