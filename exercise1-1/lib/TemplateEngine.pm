@@ -17,8 +17,8 @@ sub render {
 	
 	#引数のデリファレンスと分割
 	my %insertText = %$insertText;
-    my $title = $insertText{"title"};
-    my $content = $insertText{"content"};
+	my $title = $insertText{"title"};
+	my $content = $insertText{"content"};
 
 	#HTMLエスケープ
     $title = &escapeChars($title);
