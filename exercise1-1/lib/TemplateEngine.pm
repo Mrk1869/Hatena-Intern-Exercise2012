@@ -21,11 +21,11 @@ sub render {
 	my $content = $insertText{"content"};
 
 	#HTMLエスケープ
-    $title = &escapeChars($title);
-    $content = &escapeChars($content);
+	$title = &escapeChars($title);
+	$content = &escapeChars($content);
 
 	#テンプレートファイルオープン
-    open(templateFileHundle, '<:utf8', $self ->{file}) or die "Cannot open ".$self->{file}." :".$!;
+	open(templateFileHundle, '<:utf8', $self ->{file}) or die "Cannot open ".$self->{file}." :".$!;
 	my @template = <templateFileHundle>;
 	close(templateFileHundle);
 
