@@ -9,5 +9,8 @@ my $template = TemplateEngine->new( file => 'templates/main.html' );
 
 print $template->render({
   title   => 'タイトル',
-  content => 'これはコンテンツです',
+  content => 'これはコンテンツです.
+  contentにリンクを埋め込みます.
+  http://dotinstall.com/
+  リンク先のタイトルに変換されてそのURLへジャンプできます.',
 }); 

@@ -5,6 +5,9 @@ use warnings;
 package TemplateEngine;
 use IO::File;
 use Encode;
+use LWP::UserAgent;
+use HTTP::Request;
+use HTTP::Response;
 
 sub new {
 	my ($class, %values) = @_;
@@ -29,6 +32,13 @@ sub render {
 	my @template = <templateFileHundle>;
 	close(templateFileHundle);
 
+	#リンクの置き換え
+	if($content =~ /(https?:\/\/.+)[^\n]/g){
+		my $URL = $1;
+		my $URLTitle = getURLTitle($URL);
+		$content =~ s/$URL/<a href = "$URL">$URLTitle<\/a>/g;
+	}
+
 	#テンプレートの置き換え
 	foreach my $line (@template){
 		$line =~ s/{%\s*title\s*%}/$title/g;
@@ -44,6 +54,21 @@ sub escapeChars {
 	$char =~ s/"/&quot;/g;
 	$char =~ s/'/#39;/g;
 	$char =~ s/&/&amp;/g;
+	$char;
+}
+
+sub getURLTitle {
+	my $url = $_[0];
+	my $title = "Jump to URL!(Could not get title.)";
+	my $userAgent = LWP::UserAgent->new();
+	my $res = $userAgent->get($url);
+	if ($res->is_success) {
+		my $html = $res->decoded_content;
+		if($html =~ m/<title>(.+)<\/title>/){
+			$title = $1;
+		}
+	}
+	return $title;
 }
 
 #何か返さないとエラー
